@@ -71,6 +71,8 @@ namespace NzbDrone.Core.Test.Qualities
             {
                 Quality.Unknown,
                 Quality.CAM,
+                Quality.CAMV2,
+                Quality.CAMV3,
                 Quality.TELECINE,
                 Quality.DVDSCR,
                 Quality.REGIONAL,
