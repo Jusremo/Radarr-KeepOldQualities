@@ -1,7 +1,8 @@
 using System.IO;
 using NLog;
 using NzbDrone.Common.Disk;
-using NzbDrone.Common.Extensions;
+
+// using NzbDrone.Common.Extensions;
 using NzbDrone.Core.MediaFiles.MovieImport;
 using NzbDrone.Core.Parser.Model;
 
@@ -14,7 +15,6 @@ namespace NzbDrone.Core.MediaFiles
 
     public class UpgradeMediaFileService : IUpgradeMediaFiles
     {
-        private readonly IRecycleBinProvider _recycleBinProvider;
         private readonly IMediaFileService _mediaFileService;
         private readonly IMoveMovieFiles _movieFileMover;
         private readonly IDiskProvider _diskProvider;
@@ -26,14 +26,13 @@ namespace NzbDrone.Core.MediaFiles
                                        IDiskProvider diskProvider,
                                        Logger logger)
         {
-            _recycleBinProvider = recycleBinProvider;
             _mediaFileService = mediaFileService;
             _movieFileMover = movieFileMover;
             _diskProvider = diskProvider;
             _logger = logger;
         }
 
-        public MovieFileMoveResult UpgradeMovieFile(MovieFile movieFile, LocalMovie localMovie, bool copyOnly = false)
+        public MovieFileMoveResult UpgradeMovieFile(MovieFile movieFile, LocalMovie localMovie, bool copyOnly = true)
         {
             _logger.Trace("Upgrading movie file.");
 
@@ -55,17 +54,17 @@ namespace NzbDrone.Core.MediaFiles
                 var subfolder = rootFolder.GetRelativePath(_diskProvider.GetParentFolder(movieFilePath));
                 string recycleBinPath = null;
 
-                if (_diskProvider.FileExists(movieFilePath))
-                {
-                    _logger.Debug("Removing existing movie file: {0}", existingFile);
-                    recycleBinPath = _recycleBinProvider.DeleteFile(movieFilePath, subfolder);
-                }
-                else
-                {
-                    _logger.Warn("Existing movie file missing from disk: {0}", movieFilePath);
-                }
+                // var subfolder = rootFolder.GetRelativePath(_diskProvider.GetParentFolder(movieFilePath));
 
-                moveFileResult.OldFiles.Add(new DeletedMovieFile(existingFile, recycleBinPath));
+                // if (_diskProvider.FileExists(movieFilePath))
+                // {
+                //    _logger.Debug("Removing existing movie file: {0}", existingFile);
+
+                // _recycleBinProvider.DeleteFile(movieFilePath, subfolder);
+                // }
+
+                moveFileResult.OldFiles.Add(existingFile);
+
                 _mediaFileService.Delete(existingFile, DeleteMediaFileReason.Upgrade);
             }
 
