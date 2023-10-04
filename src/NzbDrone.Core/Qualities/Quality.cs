@@ -82,6 +82,8 @@ namespace NzbDrone.Core.Qualities
         // Pre-release
         public static Quality WORKPRINT => new Quality(24, "WORKPRINT", Source.WORKPRINT, 0); // new
         public static Quality CAM => new Quality(25, "CAM", Source.CAM, 0); // new
+        public static Quality CAMV2 => new Quality(32, "CAMV2", Source.CAM, 0); // new
+        public static Quality CAMV3 => new Quality(33, "CAMV3", Source.CAM, 0); // new
         public static Quality TELESYNC => new Quality(26, "TELESYNC", Source.TELESYNC, 0); // new
         public static Quality TELECINE => new Quality(27, "TELECINE", Source.TELECINE, 0); // new
         public static Quality DVDSCR => new Quality(28, "DVDSCR", Source.DVD, 480, Modifier.SCREENER); // new
@@ -130,6 +132,8 @@ namespace NzbDrone.Core.Qualities
                 Unknown,
                 WORKPRINT,
                 CAM,
+                CAMV2,
+                CAMV3,
                 TELESYNC,
                 TELECINE,
                 DVDSCR,
@@ -170,6 +174,8 @@ namespace NzbDrone.Core.Qualities
                 new QualityDefinition(Quality.Unknown)     { Weight = 1,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
                 new QualityDefinition(Quality.WORKPRINT)   { Weight = 2,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
                 new QualityDefinition(Quality.CAM)         { Weight = 3,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
+                new QualityDefinition(Quality.CAMV2)       { Weight = 3,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
+                new QualityDefinition(Quality.CAMV3)       { Weight = 3,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
                 new QualityDefinition(Quality.TELESYNC)    { Weight = 4,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
                 new QualityDefinition(Quality.TELECINE)    { Weight = 5,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },
                 new QualityDefinition(Quality.REGIONAL)    { Weight = 6,  MinSize = 0, MaxSize = 100, PreferredSize = 95 },

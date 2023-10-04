@@ -70,6 +70,8 @@ namespace NzbDrone.Core.Test.Qualities
             var qualities = new List<Quality>
             {
                 Quality.CAM,
+                Quality.CAMV2,
+                Quality.CAMV3,
                 Quality.TELECINE,
                 Quality.DVDSCR,
                 Quality.REGIONAL,

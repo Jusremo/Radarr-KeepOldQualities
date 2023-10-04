@@ -251,8 +251,25 @@ namespace NzbDrone.Core.Parser
                     return result;
                 }
 
+                if (sourceMatch.Groups["camv2"].Success)
+                {
+                    result.Quality = Quality.CAMV2;
+                    return result;
+                }
+
                 if (sourceMatch.Groups["cam"].Success)
                 {
+                    if (name.Contains("V2"))
+                    {
+                        result.Quality = Quality.CAMV2;
+                        return result;
+                    }
+                    else if (name.Contains("V3"))
+                    {
+                        result.Quality = Quality.CAMV3;
+                        return result;
+                    }
+
                     result.Quality = Quality.CAM;
                     return result;
                 }
