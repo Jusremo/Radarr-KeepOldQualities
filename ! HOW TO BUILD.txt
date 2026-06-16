@@ -1,0 +1,49 @@
+
+in root dir:
+yarn install
+yarn start
+
+This generates the web UI in:
+
+_output\UI
+
+## Build Backend
+
+Open the /src/Radarr.sln in Visual Studio and build the solution in this mode:
+Release - Windows - Radarr.Console
+
+
+The Radarr executable will be generated in:
+_output\net6.0-windows
+
+
+
+After running `yarn build`, the generated UI files are placed in:
+_output\UI
+
+However, Radarr expects them in:
+_output\net6.0-windows\UI
+
+If the files are not copied, launching Radarr will result in:
+
+json
+{
+  "title": "Not Found",
+  "status": 404
+}
+and the log will contain:
+IndexHtmlMapper: File ...\UI\index.html not found
+
+
+Workaround:
+
+Copy the UI directory after running `yarn build`:
+
+powershell
+robocopy .\_output\UI .\_output\net8.0-windows\UI /E
+
+
+
+ALSO in src/Directory.Build.props:
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+

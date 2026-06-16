@@ -1,4 +1,4 @@
-using System.IO;
+// using System.IO;
 using NLog;
 using NzbDrone.Common.Disk;
 
@@ -50,8 +50,8 @@ namespace NzbDrone.Core.MediaFiles
 
             if (existingFile != null)
             {
-                var movieFilePath = Path.Combine(localMovie.Movie.Path, existingFile.RelativePath);
-                var subfolder = rootFolder.GetRelativePath(_diskProvider.GetParentFolder(movieFilePath));
+                // var movieFilePath = Path.Combine(localMovie.Movie.Path, existingFile.RelativePath);
+                // var subfolder = rootFolder.GetRelativePath(_diskProvider.GetParentFolder(movieFilePath));
                 string recycleBinPath = null;
 
                 // var subfolder = rootFolder.GetRelativePath(_diskProvider.GetParentFolder(movieFilePath));
@@ -63,7 +63,8 @@ namespace NzbDrone.Core.MediaFiles
                 // _recycleBinProvider.DeleteFile(movieFilePath, subfolder);
                 // }
 
-                moveFileResult.OldFiles.Add(existingFile);
+                // moveFileResult.OldFiles.Add(existingFile);
+                moveFileResult.OldFiles.Add(new DeletedMovieFile(existingFile, recycleBinPath));
 
                 _mediaFileService.Delete(existingFile, DeleteMediaFileReason.Upgrade);
             }
